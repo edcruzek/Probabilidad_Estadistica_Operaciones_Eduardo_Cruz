@@ -1,7 +1,7 @@
 /**
  * Archivo: script.js
  * Descripción: Lógica corregida y robusta para análisis estadístico y diagramas.
- * Autor: Lalo & Gemini
+ * Autor: Lalo 
  * Fecha: 24/02/2026
  */
 
