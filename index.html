@@ -1,0 +1,187 @@
+<!--
+
+ * Autor: Eduardo Cruz
+ *24/2/2026
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Estadístico Interactivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Análisis Estadístico</h1>
+            <p>Eduardo Cruz | Probabilidad y Estadística</p>
+        </div>
+    </header>
+    <div class="container">
+        <main style="position: relative; z-index: 1;">
+        <!-- Sección de Entrada de Datos -->
+        <section class="card-full">
+            <h2>1. Entrada de Datos</h2>
+            <textarea id="data-input" rows="8" placeholder="Ingresa los datos numéricos separados por comas, espacios o saltos de línea..."></textarea>
+            <div class="button-group">
+                <button id="calculate-btn">Calcular Análisis</button>
+                <button id="generate-data-btn">Generar 20 Datos Aleatorios</button>
+            </div>
+        </section>
+
+        <!-- Sección de Estadísticas Descriptivas -->
+        <section class="card-full">
+            <h2>2. Estadísticas Descriptivas</h2>
+            <ul id="stats-results">
+                <li><strong>Media:</strong> <span id="mean"></span></li>
+                <li><strong>Mediana:</strong> <span id="median"></span></li>
+                <li><strong>Moda:</strong> <span id="mode"></span></li>
+                <li><strong>Mínimo:</strong> <span id="min"></span></li>
+                <li><strong>Máximo:</strong> <span id="max"></span></li>
+                <li><strong>Rango:</strong> <span id="range"></span></li>
+                <li><strong>Amplitud de Clase:</strong> <span id="class-width"></span></li>
+            </ul>
+        </section>
+
+        <!-- Sección de Tabla de Frecuencias -->
+        <section class="card-full" id="freq-table-card">
+            <h2>3. Tabla de Frecuencias</h2>
+            <div class="table-container">
+                <table id="freq-table">
+                    <thead>
+                        <tr>
+                            <th>Clases</th>
+                            <th>Frec. Absoluta (fi)</th>
+                            <th>Frec. Acumulada (Fi)</th>
+                            <th>Frec. Relativa (fr)</th>
+                            <th>Frec. Relativa Acum. (Fr)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="freq-table-body">
+                        <!-- Las filas se generarán con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección de Gráficas -->
+        <section class="card-full">
+            <h2>4. Gráficas</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Histograma</h3>
+                    <canvas id="histogram-chart" width="400" height="300"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Polígono de Frecuencias</h3>
+                    <canvas id="polygon-chart" width="400" height="300"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Ojiva</h3>
+                    <canvas id="ogive-chart" width="400" height="300"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Diagrama de Pareto</h3>
+                    <canvas id="pareto-chart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de Operaciones con Conjuntos -->
+        <section class="card-full">
+            <h2>5. Operaciones con Conjuntos</h2>
+            <div class="set-inputs">
+                <input type="text" id="set-a" placeholder="Conjunto A (e.g., 1,2,3,4)">
+                <input type="text" id="set-b" placeholder="Conjunto B (e.g., 3,4,5,6)">
+            </div>
+            <div class="button-group">
+                <button id="union-btn">Unión (A ∪ B)</button>
+                <button id="intersection-btn">Intersección (A ∩ B)</button>
+                <button id="difference-btn">Diferencia (A - B)</button>
+                <button id="random-sets-btn" style="background-color: transparent; color: var(--primary); border: 2px solid var(--primary);">Datos Aleatorios</button>
+            </div>
+            <p><strong>Resultado:</strong> <span id="set-result"></span></p>
+        </section>
+
+        <!-- Sección de Probabilidad y Conteo -->
+        <section class="card-full">
+            <h2>6. Probabilidad y Conteo</h2>
+            
+            <div class="conteo-grid">
+                <div class="sub-section">
+                    <h3>Permutaciones y Combinaciones</h3>
+                    <div class="perm-comb-inputs">
+                        <input type="number" id="n-input" placeholder="n (total)">
+                        <input type="number" id="r-input" placeholder="r (elegir)">
+                    </div>
+                    <div class="button-group">
+                        <button id="perm-btn">Permutación (nPr)</button>
+                        <button id="comb-btn">Combinación (nCr)</button>
+                        <button id="random-perm-btn" style="background-color: transparent; color: var(--primary); border: 2px solid var(--primary);">Datos Aleatorios</button>
+                    </div>
+                    <div class="results-box">
+                        <p><strong>Permutación:</strong> <span id="perm-result"></span></p>
+                        <p><strong>Combinación:</strong> <span id="comb-result"></span></p>
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <h3>Regla Multiplicativa + Diagrama de Árbol</h3>
+                    <div id="multiplicative-steps">
+                        <!-- Paso 1 -->
+                        <div class="step-input-group">
+                            <label>Paso 1 (Obligatorio)</label>
+                            <div class="inputs-row">
+                                <input type="text" id="step-1-name" placeholder="Nombre (ej. Color)">
+                                <input type="text" id="step-1-options" placeholder="Opciones (ej. Rojo, Azul)">
+                            </div>
+                        </div>
+                        <!-- Paso 2 -->
+                        <div class="step-input-group">
+                            <label>Paso 2 (Obligatorio)</label>
+                            <div class="inputs-row">
+                                <input type="text" id="step-2-name" placeholder="Nombre (ej. Talla)">
+                                <input type="text" id="step-2-options" placeholder="Opciones (ej. S, M, L)">
+                            </div>
+                        </div>
+                        <!-- Paso 3 -->
+                        <div class="step-input-group">
+                            <label>Paso 3 (Opcional)</label>
+                            <div class="inputs-row">
+                                <input type="text" id="step-3-name" placeholder="Nombre (ej. Logo)">
+                                <input type="text" id="step-3-options" placeholder="Opciones (ej. Sí, No)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="tree-btn">Calcular total y generar árbol</button>
+                        <button id="random-tree-btn">Datos aleatorios</button>
+                    </div>
+
+                    <div id="tree-results-container" class="results-display" style="display:none;">
+                        <div class="procedure-box">
+                            <h4>Procedimiento:</h4>
+                            <div id="tree-procedure"></div>
+                            <p class="total-result">Total resultados: <span id="tree-total"></span></p>
+                        </div>
+                        <div class="tree-viz-box">
+                            <h4>Diagrama de Árbol:</h4>
+                            <pre id="tree-diagram-text"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    </div>
+    <footer>
+        <p>1</p>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
